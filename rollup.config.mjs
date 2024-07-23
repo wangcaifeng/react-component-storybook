@@ -4,6 +4,8 @@ import commonjs from '@rollup/plugin-commonjs'
 import typescript from '@rollup/plugin-typescript'
 import json from '@rollup/plugin-json'
 import postcss from 'rollup-plugin-postcss'
+import tailwindcss from 'tailwindcss'
+import autoprefixer from 'autoprefixer'
 
 export default {
   input: 'src/index.ts', // 入口文件
@@ -21,6 +23,13 @@ export default {
   ],
   plugins: [
     peerDepsExternal(), // 处理 peerDependencies
+    postcss({
+      extract: true,
+      minimize: true,
+      sourceMap: true,
+      // modules: true,
+      plugins: [tailwindcss(), autoprefixer()]
+    }), // 处理 CSS 文件
     resolve({ extensions: ['.js', '.ts', '.tsx'] }), // 解析 node_modules 中的依赖
     commonjs(), // 转换 CommonJS 模块
     typescript({
@@ -29,11 +38,6 @@ export default {
       declarationDir: './dist/types',
       rootDir: 'src'
     }), // 编译 TypeScript
-    postcss({
-      extract: true,
-      minimize: true,
-      sourceMap: true
-    }), // 处理 CSS 文件
     json() // 处理 JSON 文件
   ],
   external: ['react', 'react-dom']
