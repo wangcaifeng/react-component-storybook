@@ -6,6 +6,9 @@ import json from '@rollup/plugin-json'
 import postcss from 'rollup-plugin-postcss'
 import tailwindcss from 'tailwindcss'
 import autoprefixer from 'autoprefixer'
+import replace from '@rollup/plugin-replace'
+import alias from '@rollup/plugin-alias'
+import path from 'path'
 
 export default {
   input: 'src/index.ts', // 入口文件
@@ -23,6 +26,17 @@ export default {
   ],
   plugins: [
     peerDepsExternal(), // 处理 peerDependencies
+    alias({
+      entries: [
+        // eslint-disable-next-line no-undef
+        { find: '@src', replacement: path.resolve(__dirname, 'src') },
+        {
+          find: '@stories',
+          // eslint-disable-next-line no-undef
+          replacement: path.resolve(__dirname, 'src/stories')
+        }
+      ]
+    }),
     postcss({
       extract: true,
       minimize: true,
@@ -30,6 +44,10 @@ export default {
       // modules: true,
       plugins: [tailwindcss(), autoprefixer()]
     }), // 处理 CSS 文件
+    replace({
+      preventAssignment: true,
+      'use client': '' // or handle "use client" as needed
+    }),
     resolve({ extensions: ['.js', '.ts', '.tsx'] }), // 解析 node_modules 中的依赖
     commonjs(), // 转换 CommonJS 模块
     typescript({
@@ -40,5 +58,6 @@ export default {
     }), // 编译 TypeScript
     json() // 处理 JSON 文件
   ],
+  context: 'window',
   external: ['react', 'react-dom']
 }

@@ -5,7 +5,7 @@ import {
   DeleteOutlined,
   PlusOutlined
 } from '@ant-design/icons'
-import UploadModule from './Upload.module.scss'
+import UploadModule from './UploadBase64.module.scss'
 
 export default function Upload({
   value,

@@ -1,6 +1,4 @@
-import React from 'react'
-import { useLocation, useNavigate } from 'react-router-dom'
-import '@src/styles/tailwind.css'
+import React, { useState, useEffect } from 'react'
 
 const subSiderStyle: React.CSSProperties = {
   color: 'rgb(102, 102, 102)',
@@ -11,36 +9,62 @@ const subSiderStyle: React.CSSProperties = {
 export default function SubSiderbar({
   sub_navs,
   extra,
-  beforeNav
+  beforeNav,
+  defaultSelectedKey,
+  onClick
 }: {
-  sub_navs: { label: string; to: { path: string }; icon?: string }[]
+  sub_navs: {
+    label: string
+    key: string
+    icon: React.FunctionComponent | string
+  }[]
   extra?: React.ReactNode[]
   beforeNav?: () => void
+  defaultSelectedKey?: string
+  onClick?: (menu: {
+    label: string
+    key: string
+    icon: React.FunctionComponent | string
+  }) => void
 }) {
-  const navigate = useNavigate()
-  const { pathname } = useLocation()
+  const [SelectKey, setSelectKey] = useState<string | undefined>('')
+  useEffect(() => {
+    if (SelectKey) {
+      return
+    }
+    setSelectKey(defaultSelectedKey)
+  }, [defaultSelectedKey, SelectKey])
   return (
     <div style={subSiderStyle} className="shadow-black pt-[42px]">
       {extra}
       {sub_navs.map((subMenu) => {
         return (
           <div
-            key={subMenu.to.path}
+            key={subMenu.key}
             onClick={() => {
+              setSelectKey(subMenu.key)
               beforeNav?.()
-              navigate(subMenu.to.path)
+              onClick?.(subMenu)
             }}
             style={{ padding: '12px 16px 12px 16px' }}
             className={`flex items-center py-2 outline-none text-center h-[40px]  cursor-pointer hover:bg-[#f4f4fe] ${
-              pathname.indexOf(subMenu.to.path.replace(/[/]$/, '')) > -1
-                ? 'bg-[#e3e5fa]'
-                : ''
+              subMenu.key === SelectKey ? 'bg-[#e3e5fa]' : ''
             }`}
           >
             {subMenu.icon ? (
-              <img className="w-[16px] flex items-center" src={subMenu.icon} />
-            ) : null}
-
+              typeof subMenu.icon === 'string' ? (
+                <img
+                  className="w-[16px] h-[16px] inline-block"
+                  src={subMenu.icon}
+                />
+              ) : (
+                <span className="w-[16px] h-[16px] inline-block">
+                  <subMenu.icon />
+                </span>
+              )
+            ) : (
+              <span className="w-[16px] h-[16px] inline-block"></span>
+            )}
             <span className="block ml-2">{subMenu.label}</span>
           </div>
         )

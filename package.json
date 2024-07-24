@@ -1,17 +1,16 @@
 {
   "name": "@devops/react-components",
-  "version": "0.0.1",
-  "type": "module",
-  "types": "dist/esm/types/index.d.ts",
+  "version": "0.0.3",
+  "type": "commonjs",
+  "types": "dist/cjs/types/index.d.ts",
   "main": "dist/cjs/index.js",
-  "module": "dist/esm/index.js",
   "files": [
     "dist"
   ],
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
-    "build-library": "rollup -c rollup.config.mjs",
+    "build-library": "rollup -c rollup.config.mjs --bundleConfigAsCjs",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
@@ -26,9 +25,11 @@
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^1.6.1",
+    "@rollup/plugin-alias": "^5.1.0",
     "@rollup/plugin-commonjs": "^26.0.1",
     "@rollup/plugin-json": "^6.1.0",
     "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-replace": "^5.0.7",
     "@rollup/plugin-typescript": "^11.1.6",
     "@storybook/addon-essentials": "^8.2.5",
     "@storybook/addon-interactions": "^8.2.5",
@@ -49,11 +50,11 @@
     "eslint-plugin-react-refresh": "^0.4.7",
     "eslint-plugin-storybook": "^0.8.0",
     "postcss": "^8.4.39",
+    "postcss-import": "^16.1.0",
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "rollup-plugin-postcss": "^4.0.2",
     "sass": "^1.77.8",
     "storybook": "^8.2.5",
-    "storybook-addon-react-router-v6": "^2.0.15",
     "tailwindcss": "^3.4.6",
     "typescript": "^5.2.2",
     "vite": "^5.3.4"
