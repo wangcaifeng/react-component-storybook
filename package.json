@@ -1,6 +1,6 @@
 {
   "name": "react-component-storybook",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "type": "commonjs",
   "types": "dist/cjs/types/index.d.ts",
   "main": "dist/cjs/index.js",
@@ -15,7 +15,7 @@
     "rollup.config.mjs",
     "tailwind.config.js",
     "tsconfig.json",
-    "vite.config"
+    "vite.config.ts"
   ],
   "keywords": [
     "react components",
