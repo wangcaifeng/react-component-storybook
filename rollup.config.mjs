@@ -42,7 +42,19 @@ export default {
       minimize: true,
       sourceMap: true,
       // modules: true,
-      plugins: [tailwindcss(), autoprefixer()]
+      plugins: [
+        tailwindcss({
+          content: ['./src/**/*.{js,ts,jsx,tsx}'],
+          theme: {
+            extend: {}
+          },
+          plugins: [],
+          corePlugins: {
+            preflight: false
+          }
+        }),
+        autoprefixer()
+      ]
     }), // 处理 CSS 文件
     replace({
       preventAssignment: true,

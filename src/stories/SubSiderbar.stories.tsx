@@ -26,9 +26,9 @@ export const Normal: Story = {
     extra: [<input placeholder="Search!" />],
     // primary: true,
     sub_navs: [
-      { label: 'CICD', key: '321', icon: cicd },
-      { label: '项目协同', key: '321', icon: venus },
-      { label: '项目设置', key: '321', icon: setting }
+      { label: 'nav-1', key: '1', icon: cicd },
+      { label: 'nav-2', key: '2', icon: venus },
+      { label: 'nav-3', key: '3', icon: setting }
     ]
   }
 }
