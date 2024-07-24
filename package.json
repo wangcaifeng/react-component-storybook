@@ -1,18 +1,24 @@
 {
-  "name": "@devops/react-components",
-  "version": "0.0.4",
+  "name": "react-component-storybook",
+  "version": "0.1.0",
   "type": "commonjs",
   "types": "dist/cjs/types/index.d.ts",
   "main": "dist/cjs/index.js",
   "files": [
-    "dist"
+    ".storybook",
+    ".vscode",
+    "src",
+    ".eslintrc.cjs",
+    ".gitignore",
+    ".prettierrc",
+    "postcss.config.mjs",
+    "rollup.config.mjs",
+    "tailwind.config.js",
+    "tsconfig.json"
   ],
   "scripts": {
-    "dev": "vite",
-    "build": "tsc -b && vite build",
     "build-library": "rollup -c rollup.config.mjs --bundleConfigAsCjs",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },

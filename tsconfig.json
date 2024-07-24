@@ -23,5 +23,5 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src"]
+  "include": ["src", ".storybook/Upload.tsx", ".storybook/Upload.stories.tsx"]
 }
