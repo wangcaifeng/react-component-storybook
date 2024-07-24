@@ -1,6 +1,6 @@
 {
   "name": "react-component-storybook",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "type": "commonjs",
   "types": "dist/cjs/types/index.d.ts",
   "main": "dist/cjs/index.js",
@@ -15,6 +15,10 @@
     "rollup.config.mjs",
     "tailwind.config.js",
     "tsconfig.json"
+  ],
+  "keywords": [
+    "react components",
+    "storybook"
   ],
   "scripts": {
     "build-library": "rollup -c rollup.config.mjs --bundleConfigAsCjs",
